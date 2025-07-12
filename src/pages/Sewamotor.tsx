@@ -18,63 +18,63 @@ const App: Component = () => {
       id: 'beat-new',
       name: 'BEAT NEW',
       price: 'Rp 50.000/hari',
-      image: '/src/assets/beat.jpg',
+      image: '/assets/beat.jpg',
       features: ['Matic', 'Irit BBM', 'Cocok untuk Harian']
     },
     {
       id: 'vario-125',
       name: 'VARIO 125',
       price: 'Rp 65.000/hari',
-      image: '/src/assets/vario.jpg',
+      image: '/assets/vario.jpg',
       features: ['Matic', 'Sporty', 'Performa Tinggi']
     },
     {
       id: 'scoopy',
       name: 'SCOOPY',
       price: 'Rp 55.000/hari',
-      image: '/src/assets/scoopy.jpg',
+      image: '/assets/scoopy.jpg',
       features: ['Matic', 'Stylish', 'Nyaman untuk Wanita']
     },
     {
       id: 'beat-street',
       name: 'BEAT STREET',
       price: 'Rp 60.000/hari',
-      image: '/src/assets/beat-street-1.png',
+      image: '/assets/beat-street-1.png',
       features: ['Matic', 'Sport Design', 'Agresif']
     },
     {
       id: 'vario-160',
       name: 'VARIO 160',
       price: 'Rp 75.000/hari',
-      image: '/src/assets/Vario 160 ABS_LWO_BK.png',
+      image: '/assets/Vario 160 ABS_LWO_BK.png',
       features: ['Matic', 'ABS', 'Performa Maksimal']
     },
     {
       id: 'genio',
       name: 'HONDA GENIO',
       price: 'Rp 58.000/hari',
-      image: '/src/assets/genio.png',
+      image: '/assets/genio.png',
       features: ['Matic', 'Stylish', 'Modern Design']
     },
     {
       id: 'cbr-150',
       name: 'CBR 150',
       price: 'Rp 85.000/hari',
-      image: '/src/assets/cbr.png',
+      image: '/assets/cbr.png',
       features: ['Sport', 'Manual', 'Racing Style']
     },
     {
       id: 'mio-m3',
       name: 'MIO M3',
       price: 'Rp 45.000/hari',
-      image: '/src/assets/Mio-M3-Metallic-Red-1.png',
+      image: '/assets/Mio-M3-Metallic-Red-1.png',
       features: ['Matic', 'Ekonomis', 'Yamaha Quality']
     },
     {
       id: 'vespa-sprint',
       name: 'VESPA SPRINT',
       price: 'Rp 95.000/hari',
-      image: '/src/assets/Sprint-S-White-Innocente.png',
+      image: '/assets/Sprint-S-White-Innocente.png',
       features: ['Classic', 'Premium', 'Italian Style']
     }
   ];
@@ -93,7 +93,7 @@ const App: Component = () => {
             <div class="flex items-center space-x-2">
               <div class="w-10 h-10 bg-500 rounded-lg flex items-center justify-center overflow-hidden">
                 <img 
-                  src="/src/assets/nasi gigit.png" 
+                  src="/assets/nasi gigit.png" 
                   alt="Logo" 
                   class="w-full h-full object-cover"
                 />
