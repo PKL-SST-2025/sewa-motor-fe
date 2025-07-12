@@ -100,7 +100,7 @@ const RegisterPage = () => {
             <div class="flex items-center space-x-2">
               <div class="w-10 h-10 bg--500 rounded-lg flex items-center justify-center overflow-hidden">
                 <img 
-                  src="/src/assets/nasi gigit.png" 
+                  src="/assets/nasi gigit.png" 
                   alt="Logo" 
                   class="w-full h-full object-cover"
                 />
@@ -322,7 +322,7 @@ const RegisterPage = () => {
             {/* Honda Vario Card */}
             <div class="absolute -right-8 top-8 w-80 h-56 bg-gradient-to-br from-purple-600 to-purple-800 rounded-2xl shadow-xl transform rotate-3 opacity-90 border border-purple-500/30 overflow-hidden">
               <img 
-                src="/src/assets/vario.jpg" 
+                src="/assets/vario.jpg" 
                 alt="Honda Vario 125"
                 class="absolute inset-0 w-full h-full object-cover"
               />
@@ -336,7 +336,7 @@ const RegisterPage = () => {
             {/* Honda Scoopy Card */}
             <div class="absolute -left-12 bottom-4 w-80 h-56 bg-gradient-to-br from-red-600 to-red-800 rounded-2xl shadow-lg transform -rotate-2 opacity-80 border border-red-500/30 overflow-hidden">
               <img 
-                src="/src/assets/scoopy.jpg" 
+                src="/assets/scoopy.jpg" 
                 alt="Honda Scoopy"
                 class="absolute inset-0 w-full h-full object-cover"
               />

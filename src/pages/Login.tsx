@@ -45,7 +45,7 @@ const LoginPage = () => {
             <div class="flex items-center space-x-2">
               <div class="w-10 h-10 bg--500 rounded-lg flex items-center justify-center overflow-hidden">
                 <img 
-                  src="/src/assets/nasi gigit.png" 
+                  src="/assets/nasi gigit.png" 
                   alt="Logo" 
                   class="w-full h-full object-cover"
                 />
@@ -165,7 +165,7 @@ const LoginPage = () => {
             {/* Main Motorcycle Image - Vario */}
             <div class="w-96 h-64 bg-gradient-to-br from-red-500 to-red-700 rounded-2xl shadow-2xl relative overflow-hidden">
               <img 
-                src="/src/assets/vario.jpg" 
+                src="/assets/vario.jpg" 
                 alt="Honda Vario 125"
                 class="absolute inset-0 w-full h-full object-cover"
               />
@@ -179,7 +179,7 @@ const LoginPage = () => {
             {/* Second Motorcycle - Scoopy */}
             <div class="absolute -right-8 top-8 w-80 h-56 bg-gradient-to-br from-gray-600 to-gray-800 rounded-2xl shadow-xl transform rotate-3 opacity-80 overflow-hidden">
               <img 
-                src="/src/assets/scoopy.jpg" 
+                src="/assets/scoopy.jpg" 
                 alt="Honda Scoopy"
                 class="absolute inset-0 w-full h-full object-cover"
               />
@@ -193,7 +193,7 @@ const LoginPage = () => {
             {/* Third Motorcycle - Beat */}
             <div class="absolute -left-12 bottom-4 w-72 h-48 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl shadow-lg transform -rotate-2 opacity-70 overflow-hidden">
               <img 
-                src="/src/assets/beat.jpg" 
+                src="/assets/beat.jpg" 
                 alt="Honda Beat"
                 class="absolute inset-0 w-full h-full object-cover"
               />

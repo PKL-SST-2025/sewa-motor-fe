@@ -14,7 +14,7 @@ const GalleryPage: Component = () => {
             <div class="flex items-center space-x-2">
               <div class="w-10 h-10 bg--500 rounded-lg flex items-center justify-center overflow-hidden">
                 <img 
-                  src="/src/assets/nasi gigit.png" 
+                  src="/assets/nasi gigit.png" 
                   alt="Logo" 
                   class="w-full h-full object-cover"
                 />
@@ -103,7 +103,7 @@ const GalleryPage: Component = () => {
           <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-yellow-500 transition-all duration-300 transform hover:scale-105">
             <div class="aspect-video bg-gray-800 relative overflow-hidden">
               <img 
-                src="/src/assets/beat.jpg" 
+                src="/assets/beat.jpg" 
                 alt="Honda Beat"
                 class="w-full h-full object-cover"
               />
@@ -119,7 +119,7 @@ const GalleryPage: Component = () => {
           <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-yellow-500 transition-all duration-300 transform hover:scale-105">
             <div class="aspect-video bg-gray-800 relative overflow-hidden">
               <img 
-                src="/src/assets/vario.jpg" 
+                src="/assets/vario.jpg" 
                 alt="Honda Vario 125"
                 class="w-full h-full object-cover"
               />
@@ -135,7 +135,7 @@ const GalleryPage: Component = () => {
           <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-yellow-500 transition-all duration-300 transform hover:scale-105">
             <div class="aspect-video bg-gray-800 relative overflow-hidden">
               <img 
-                src="/src/assets/scoopy.jpg" 
+                src="/assets/scoopy.jpg" 
                 alt="Honda Scoopy"
                 class="w-full h-full object-cover"
               />
@@ -151,7 +151,7 @@ const GalleryPage: Component = () => {
           <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-yellow-500 transition-all duration-300 transform hover:scale-105">
             <div class="aspect-video bg-gray-800 relative overflow-hidden">
               <img 
-                src="/src/assets/beat-street-1.png" 
+                src="/assets/beat-street-1.png" 
                 alt="Honda Beat Street"
                 class="w-full h-full object-cover"
               />
@@ -167,7 +167,7 @@ const GalleryPage: Component = () => {
           <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-yellow-500 transition-all duration-300 transform hover:scale-105">
             <div class="aspect-video bg-gray-800 relative overflow-hidden">
               <img 
-                src="/src/assets/Vario 160 ABS_LWO_BK.png" 
+                src="/assets/Vario 160 ABS_LWO_BK.png" 
                 alt="Honda Vario 160"
                 class="w-full h-full object-cover"
               />
@@ -183,7 +183,7 @@ const GalleryPage: Component = () => {
           <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-yellow-500 transition-all duration-300 transform hover:scale-105">
             <div class="aspect-video bg-gray-800 relative overflow-hidden">
               <img 
-                src="/src/assets/genio.png" 
+                src="assets/genio.png" 
                 alt="Honda Genio"
                 class="w-full h-full object-cover"
               />
@@ -199,7 +199,7 @@ const GalleryPage: Component = () => {
           <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-yellow-500 transition-all duration-300 transform hover:scale-105">
             <div class="aspect-video bg-gray-800 relative overflow-hidden">
               <img 
-                src="/src/assets/cbr.png" 
+                src="/assets/cbr.png" 
                 alt="Honda cbr 150"
                 class="w-full h-full object-cover"
               />
@@ -215,7 +215,7 @@ const GalleryPage: Component = () => {
           <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-yellow-500 transition-all duration-300 transform hover:scale-105">
             <div class="aspect-video bg-gray-800 relative overflow-hidden">
               <img 
-                src="/src/assets/Mio-M3-Metallic-Red-1.png" 
+                src="/assets/Mio-M3-Metallic-Red-1.png" 
                 alt="Honda Vario Techno"
                 class="w-full h-full object-cover"
               />
@@ -231,7 +231,7 @@ const GalleryPage: Component = () => {
           <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-yellow-500 transition-all duration-300 transform hover:scale-105">
             <div class="aspect-video bg-gray-800 relative overflow-hidden">
               <img 
-                src="/src/assets/Sprint-S-White-Innocente.png" 
+                src="/assets/Sprint-S-White-Innocente.png" 
                 alt="Vespa"
                 class="w-full h-full object-cover"
               />
@@ -247,7 +247,7 @@ const GalleryPage: Component = () => {
           <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-yellow-500 transition-all duration-300 transform hover:scale-105">
             <div class="aspect-video bg-gray-800 relative overflow-hidden">
               <img 
-                src="/src/assets/beat.jpg" 
+                src="/assets/beat.jpg" 
                 alt="Honda Beat ESP"
                 class="w-full h-full object-cover"
               />
@@ -269,7 +269,7 @@ const GalleryPage: Component = () => {
               <div class="flex items-center space-x-2 mb-4">
                 <div class="w-10 h-10  rounded-lg flex items-center justify-center overflow-hidden">
                   <img 
-                    src="/src/assets/nasi gigit.png" 
+                    src="/assets/nasi gigit.png" 
                     alt="Logo" 
                     class="w-full h-full object-cover"
                   />

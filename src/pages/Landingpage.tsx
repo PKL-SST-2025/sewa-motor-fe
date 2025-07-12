@@ -56,7 +56,7 @@ const App: Component = () => {
     {
       id: 'genio',
       name: 'HONDA GENIO',
-      image: '/src/assets/genio.png',
+      image: '/assets/genio.png',
       price: 'Rp 58.000/hari',
       features: ['Matic', 'Stylish', 'Modern Design']
     }

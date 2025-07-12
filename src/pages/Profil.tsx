@@ -41,7 +41,7 @@ const ProfilePage: Component = () => {
             <div class="flex items-center space-x-2">
               <div class="w-10 h-10 bg--500 rounded-lg flex items-center justify-center overflow-hidden">
                 <img 
-                  src="/src/assets/nasi gigit.png" 
+                  src="/assets/nasi gigit.png" 
                   alt="Logo" 
                   class="w-full h-full object-cover"
                 />
@@ -94,7 +94,7 @@ const ProfilePage: Component = () => {
                 <div class="flex flex-col items-center">
                   <div class="w-24 h-24 bg-gray-700 rounded-full flex items-center justify-center mb-4 border-2 border-yellow-500 overflow-hidden">
                     <img 
-                      src="/src/assets/0081ad1c-321d-47e1-976d-d3cd6a95f0ed.jpg" 
+                      src="/assets/0081ad1c-321d-47e1-976d-d3cd6a95f0ed.jpg" 
                       alt="Profile Picture"
                       class="w-full h-full object-cover"
                     />

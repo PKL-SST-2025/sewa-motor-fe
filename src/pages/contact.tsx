@@ -36,7 +36,7 @@ const ContactPage: Component = () => {
             <div class="flex items-center space-x-2">
               <div class="w-10 h-10 bg--500 rounded-lg flex items-center justify-center overflow-hidden">
                 <img 
-                  src="/src/assets/nasi gigit.png" 
+                  src="/assets/nasi gigit.png" 
                   alt="Logo" 
                   class="w-full h-full object-cover"
                 />
@@ -306,7 +306,7 @@ const ContactPage: Component = () => {
               <div class="flex items-center space-x-2 mb-4">
                 <div class="w-10 h-10 bg--500 rounded-lg flex items-center justify-center overflow-hidden">
                   <img 
-                    src="/src/assets/nasi gigit.png" 
+                    src="/assets/nasi gigit.png" 
                     alt="Logo" 
                     class="w-full h-full object-cover"
                   />
