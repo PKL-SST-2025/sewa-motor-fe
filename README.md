@@ -1,28 +1,19 @@
-## Usage
+Muhammad Syaamil Ihsan 
 
-```bash
-$ npm install # or pnpm install or yarn install
-```
+Link Figma : https://www.figma.com/design/KCeXTSnejQaVv60I2cOr3l/SENTR?node-id=0-1&t=LaZPxGIk0yXbSY91-1
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
 
-## Available Scripts
 
-In the project directory, you can run:
-
-### `npm run dev`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
-
-### `npm run build`
-
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-## Deployment
-
-Learn more about deploying your application with the [documentations](https://vite.dev/guide/static-deploy.html)
+Pengenalan lingkungan kerja dan mencari tahu tentang bahasa pemrograman Rust
+merancang dan membuat ideaplikasi
+mencari referensi website dan mendesign tampilan LandingPage
+Melanjutkan mendesign fitur fitur tampilan
+Mempelajari solid js, dan membuat frontend Landing Page
+melanjutkana membuat frontend Login register
+Melanjutkan membuat frontend fitur fitur
+merapihkan frontend 
+melanjutkan merapihkan frontend dan menginstall rust 
+fisishing frontend
+lanjut merapihkan 
+menambahkan 1 page dan ngepush ke github
+menegecek forntend codingan	
