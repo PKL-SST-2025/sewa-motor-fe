@@ -121,7 +121,7 @@ const MotorBookingForm: Component = () => {
         <nav class="container mx-auto px-4 py-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
-              <div class="w-10 h-10 bg-yellow-500 rounded-lg flex items-center justify-center overflow-hidden">
+              <div class="w-10 h-10  rounded-lg flex items-center justify-center overflow-hidden">
                 <img 
                   src="/src/assets/nasi gigit.png" 
                   alt="Logo" 
@@ -132,9 +132,8 @@ const MotorBookingForm: Component = () => {
             </div>
             
             <div class="hidden md:flex space-x-8">
-              <a href="/" class="hover:text-yellow-500 transition-colors">HOME</a>
-              <a href="/contact" class="hover:text-yellow-500 transition-colors">CONTACT PERSON</a>
-              <a href="/gallery" class="hover:text-yellow-500 transition-colors">GALLERY</a>
+              <a href="/" class="hover:text-yellow-500 transition-colors">TENTANG KAMI</a>
+              
               <a href="/sewamotor" class="hover:text-yellow-500 transition-colors">ORDER</a>
               <a href="/orderan" class="hover:text-yellow-500 transition-colors">RIWAYAT</a>
               <a href="/profil" class="hover:text-yellow-500 transition-colors">PROFIL</a>
