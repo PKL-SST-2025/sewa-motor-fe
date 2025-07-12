@@ -4,7 +4,6 @@ Link Figma : https://www.figma.com/design/KCeXTSnejQaVv60I2cOr3l/SENTR?node-id=0
 Link APP : https://sewamotor.vercel.app
 
 
-
 Pengenalan lingkungan kerja dan mencari tahu tentang bahasa pemrograman Rust
 merancang dan membuat ideaplikasi
 mencari referensi website dan mendesign tampilan LandingPage
