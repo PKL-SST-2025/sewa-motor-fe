@@ -1,4 +1,4 @@
-import { Component, createSignal, onMount } from 'solid-js';
+import { Component, createSignal } from 'solid-js';
 import { For } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
 
@@ -12,7 +12,6 @@ interface MotorOption {
 
 const App: Component = () => {
   const [isMenuOpen, setIsMenuOpen] = createSignal(false);
-  const [selectedMotor, setSelectedMotor] = createSignal<string>('');
   const [currentSlide, setCurrentSlide] = createSignal(0);
 
   const navigate = useNavigate();
@@ -72,11 +71,6 @@ const App: Component = () => {
 
   const prevSlide = () => {
     setCurrentSlide(prev => prev > 0 ? prev - 1 : maxSlide);
-  };
-
-  const getVisibleMotors = () => {
-    const startIndex = currentSlide() * itemsPerPage;
-    return motorOptions.slice(startIndex, startIndex + itemsPerPage);
   };
 
   const handleRentalClick = () => {

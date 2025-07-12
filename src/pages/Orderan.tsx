@@ -51,7 +51,7 @@ const OrderanSayaPage: Component = () => {
         <nav class="container mx-auto px-4 py-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
-              <div class="w-10 h-10 bg-yellow-500 rounded-lg flex items-center justify-center overflow-hidden">
+              <div class="w-10 h-10  rounded-lg flex items-center justify-center overflow-hidden">
                 <img 
                   src="/src/assets/nasi gigit.png" 
                   alt="Logo" 

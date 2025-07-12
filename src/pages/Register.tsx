@@ -258,7 +258,7 @@ const RegisterPage = () => {
             </div>
 
             <button
-              onClick={() => navigate('/Login')}
+              onClick={handleSubmit}
               disabled={isLoading()}
               class="w-full bg-yellow-400 text-black font-bold py-4 px-6 rounded-xl hover:bg-yellow-300 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]"
             >

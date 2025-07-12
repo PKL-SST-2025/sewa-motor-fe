@@ -162,7 +162,10 @@ const App: Component = () => {
                       </ul>
                       
                       <button 
-                        onClick={() => navigate('/sewa')}
+                        onClick={() => {
+                          handleRentalClick(motor.id);
+                          navigate('/sewa');
+                        }}
                         class={`w-full py-3 rounded-lg font-semibold transition-colors ${
                           selectedMotor() === motor.id
                             ? 'bg-yellow-600 text-black'
