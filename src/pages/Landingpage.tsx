@@ -21,35 +21,35 @@ const App: Component = () => {
     {
       id: 'beat',
       name: 'BEAT NEW',
-      image: '/src/assets/beat.jpg',
+      image: '/assets/beat.jpg',
       price: 'Rp 50.000/hari',
       features: ['Matic', 'Irit BBM', 'Cocok untuk Harian']
     },
     {
       id: 'vario',
       name: 'VARIO 125',
-      image: '/src/assets/vario.jpg',
+      image: '/assets/vario.jpg',
       price: 'Rp 65.000/hari',
       features: ['Matic', 'Sporty', 'Performa Tinggi']
     },
     {
       id: 'scoopy',
       name: 'SCOOPY',
-      image: '/src/assets/scoopy.jpg',
+      image: '/assets/scoopy.jpg',
       price: 'Rp 55.000/hari',
       features: ['Matic', 'Stylish', 'Nyaman untuk Wanita']
     },
     {
       id: 'beat-street',
       name: 'BEAT STREET',
-      image: '/src/assets/beat-street-1.png',
+      image: '/assets/beat-street-1.png',
       price: 'Rp 60.000/hari',
       features: ['Matic', 'Sport Design', 'Agresif']
     },
     {
       id: 'vario-160',
       name: 'VARIO 160',
-      image: '/src/assets/Vario 160 ABS_LWO_BK.png',
+      image: '/assets/Vario 160 ABS_LWO_BK.png',
       price: 'Rp 75.000/hari',
       features: ['Matic', 'ABS', 'Performa Maksimal']
     },
@@ -94,7 +94,7 @@ const App: Component = () => {
             <div class="flex items-center space-x-2">
               <div class="w-10 h-10 bg--500 rounded-lg flex items-center justify-center overflow-hidden">
                 <img 
-                  src="/src/assets/nasi gigit.png" 
+                  src="/assets/nasi gigit.png" 
                   alt="Logo" 
                   class="w-full h-full object-cover"
                 />
@@ -411,7 +411,7 @@ const App: Component = () => {
               <div class="flex items-center space-x-2 mb-4">
                 <div class="w-10 h-10  rounded-lg flex items-center justify-center overflow-hidden">
                   <img 
-                    src="/src/assets/nasi gigit.png" 
+                    src="/assets/nasi gigit.png" 
                     alt="Logo" 
                     class="w-full h-full object-cover"
                   />
