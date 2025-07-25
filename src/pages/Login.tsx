@@ -11,30 +11,33 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e: Event) => {
-    e.preventDefault();
-    setError('');
-    
-    // Validation check
-    if (!username().trim()) {
-      setError('Username harus diisi');
-      return;
-    }
-    
-    if (!password().trim()) {
-      setError('Kata sandi harus diisi');
-      return;
-    }
+  e.preventDefault();
+  setError('');
 
-    setIsLoading(true);
+  if (!username().trim()) return setError('Username harus diisi');
+  if (!password().trim()) return setError('Kata sandi harus diisi');
+
+  setIsLoading(true);
+
+  try {
+    const res = await fetch("http://localhost:8000/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: username(), password: password() })
+    });
+
+    if (!res.ok) throw new Error("Username atau password salah");
     
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Login attempt:', { username: username(), password: password() });
-      setIsLoading(false);
-      // Navigate to sewamotor page only if validation passes
-      navigate('/sewamotor');
-    }, 1500);
-  };
+    const data = await res.json();
+    localStorage.setItem("token", data.access_token);
+    navigate('/sewamotor');
+  } catch (err) {
+    setError((err as Error).message);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div class="min-h-screen bg-black flex">
