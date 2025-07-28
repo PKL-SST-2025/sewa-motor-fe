@@ -30,8 +30,6 @@ const RegisterPage = () => {
     }
   };
 
-    const navigate = useNavigate();
-    
   const validateForm = (): boolean => {
     const data = formData();
     const newErrors: Partial<FormData> = {};
@@ -54,8 +52,8 @@ const RegisterPage = () => {
 
     if (!data.nomorTelepon.trim()) {
       newErrors.nomorTelepon = 'Nomor telepon wajib diisi';
-    } else if (!/^(\+62|62|0)8[1-9][0-9]{6,9}$/.test(data.nomorTelepon)) {
-      newErrors.nomorTelepon = 'Format nomor telepon tidak valid';
+    } else if (!/^(\+62|62|0)[8][0-9]{8,11}$/.test(data.nomorTelepon.replace(/\s/g, ''))) {
+      newErrors.nomorTelepon = 'Format nomor telepon tidak valid (contoh: 08123456789)';
     }
 
     if (!data.password) {
@@ -74,22 +72,42 @@ const RegisterPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: Event) => {
-    e.preventDefault();
-    
-    if (!validateForm()) {
-      return;
+  const navigate = useNavigate();
+
+ const handleSubmit = async (e: Event) => {
+  e.preventDefault();
+  if (!validateForm()) return;
+
+  setIsLoading(true);
+  setErrors({});
+
+  try {
+    const res = await fetch("http://localhost:8000/api/register", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    full_name: formData().namaLengkap,
+    username: formData().username,
+    email: formData().email,
+    phone: formData().nomorTelepon,
+    password: formData().password,
+  }),
+});
+
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(err || "Register failed");
     }
 
-    setIsLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Registration data:', formData());
-      setIsLoading(false);
-      // Add your registration logic here
-    }, 2000);
-  };
+    // berhasil, arahkan ke halaman login
+    navigate("/login");
+  } catch (error) {
+    setErrors({ email: (error as Error).message });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div class="min-h-screen bg-black flex">
