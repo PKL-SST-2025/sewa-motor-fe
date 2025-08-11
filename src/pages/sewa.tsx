@@ -22,6 +22,7 @@ interface MotorOption {
 
 const MotorBookingForm: Component = () => {
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = createSignal(false);
   const [bookingData, setBookingData] = createSignal<BookingData>({
     tanggalPeminjaman: '',
     jamPeminjaman: '',
@@ -52,7 +53,9 @@ const MotorBookingForm: Component = () => {
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (isSubmitting()) return; // Prevent double submission
+    
     const data = bookingData();
     
     // Validate required fields
@@ -63,6 +66,8 @@ const MotorBookingForm: Component = () => {
       return;
     }
 
+    setIsSubmitting(true);
+
     // Get selected motor details
     const selectedMotor = motorOptions.find(m => m.id === data.pilihMotor);
     const motorName = selectedMotor ? selectedMotor.name : data.pilihMotor;
@@ -71,7 +76,7 @@ const MotorBookingForm: Component = () => {
     // Generate booking ID
     const bookingId = 'BWK' + Date.now().toString().slice(-6);
 
-    // Create booking record for history
+    // Create booking record
     const bookingRecord = {
       id: bookingId,
       tanggalPeminjaman: data.tanggalPeminjaman,
@@ -88,30 +93,134 @@ const MotorBookingForm: Component = () => {
       waktuBooking: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
     };
 
-    // Save to localStorage for order history
+    console.log('=== SUBMITTING BOOKING TO DATABASE ===');
+    console.log('Booking data:', bookingRecord);
+    
     try {
-      const existingOrders = JSON.parse(localStorage.getItem('bookingHistory') || '[]');
-      existingOrders.unshift(bookingRecord); // Add new order at the beginning
-      localStorage.setItem('bookingHistory', JSON.stringify(existingOrders));
+      // Save to backend database
+      await saveBookingToDatabase(bookingRecord);
+      
+      // Also save to localStorage for backup
+      try {
+        const existingOrders = JSON.parse(localStorage.getItem('bookingHistory') || '[]');
+        existingOrders.unshift(bookingRecord);
+        localStorage.setItem('bookingHistory', JSON.stringify(existingOrders));
+        console.log('Backup saved to localStorage');
+      } catch (error) {
+        console.error('Error saving to localStorage:', error);
+      }
+
+      // Create URL with booking data as search parameters
+      const params = new URLSearchParams({
+        tanggalPeminjaman: data.tanggalPeminjaman,
+        jamPeminjaman: data.jamPeminjaman,
+        alamatPengantaran: data.alamatPengantaran,
+        tanggalPengembalian: data.tanggalPengembalian,
+        jamPengembalian: data.jamPengembalian,
+        alamatPengembalian: data.alamatPengembalian,
+        pilihCabang: data.pilihCabang,
+        pilihMotor: motorName,
+        bookingId: bookingId
+      });
+
+      // Navigate to success page
+      navigate(`/kirimdata?${params.toString()}`);
+      
     } catch (error) {
-      console.error('Error saving booking history:', error);
+      console.error('Error saving booking:', error);
+      alert(`Gagal menyimpan booking: ${(error as Error).message}`);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Function to save booking to backend database
+  const saveBookingToDatabase = async (bookingRecord: any) => {
+    const token = localStorage.getItem('jwt');
+    
+    console.log('=== SAVE TO DATABASE ===');
+    console.log('Token exists:', !!token);
+    console.log('Booking record:', bookingRecord);
+    
+    if (!token) {
+      throw new Error('No authentication token. Please login first.');
     }
 
-    // Create URL with booking data as search parameters
-    const params = new URLSearchParams({
-      tanggalPeminjaman: data.tanggalPeminjaman,
-      jamPeminjaman: data.jamPeminjaman,
-      alamatPengantaran: data.alamatPengantaran,
-      tanggalPengembalian: data.tanggalPengembalian,
-      jamPengembalian: data.jamPengembalian,
-      alamatPengembalian: data.alamatPengembalian,
-      pilihCabang: data.pilihCabang,
-      pilihMotor: motorName,
-      bookingId: bookingId
-    });
+    // Prepare data for backend (multiple field name formats)
+    const backendData = {
+      // Standard field names
+      tanggal_peminjaman: bookingRecord.tanggalPeminjaman,
+      jam_peminjaman: bookingRecord.jamPeminjaman,
+      alamat_pengantaran: bookingRecord.alamatPengantaran,
+      tanggal_pengembalian: bookingRecord.tanggalPengembalian,
+      jam_pengembalian: bookingRecord.jamPengembalian,
+      alamat_pengembalian: bookingRecord.alamatPengembalian,
+      pilih_cabang: bookingRecord.pilihCabang,
+      pilih_motor: bookingRecord.pilihMotor,
+      motor_price: bookingRecord.motorPrice,
+      status: bookingRecord.status,
+      tanggal_booking: bookingRecord.tanggalBooking,
+      waktu_booking: bookingRecord.waktuBooking,
+      
+      // Alternative field names (camelCase)
+      tanggalPeminjaman: bookingRecord.tanggalPeminjaman,
+      jamPeminjaman: bookingRecord.jamPeminjaman,
+      alamatPengantaran: bookingRecord.alamatPengantaran,
+      tanggalPengembalian: bookingRecord.tanggalPengembalian,
+      jamPengembalian: bookingRecord.jamPengembalian,
+      alamatPengembalian: bookingRecord.alamatPengembalian,
+      pilihCabang: bookingRecord.pilihCabang,
+      pilihMotor: bookingRecord.pilihMotor,
+      motorPrice: bookingRecord.motorPrice,
+      
+      // Additional fields
+      booking_id: bookingRecord.id,
+      id: bookingRecord.id
+    };
 
-    // Navigate to kirimdata page with booking data
-    navigate(`/kirimdata?${params.toString()}`);
+    // Try multiple endpoints
+    const endpoints = [
+      'http://localhost:8000/api/bookings',
+      'http://localhost:8000/api/orders',
+      'http://localhost:8000/api/sewa',
+      'http://localhost:8000/api/peminjaman'
+    ];
+
+    let lastError = '';
+    
+    for (const endpoint of endpoints) {
+      try {
+        console.log(`Trying POST to: ${endpoint}`);
+        console.log('Payload:', backendData);
+        
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(backendData)
+        });
+
+        console.log(`${endpoint} response status:`, response.status);
+        console.log(`${endpoint} response ok:`, response.ok);
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log(`SUCCESS: Booking saved to ${endpoint}`, result);
+          return result;
+        } else {
+          const errorText = await response.text();
+          console.log(`${endpoint} failed:`, response.status, errorText);
+          lastError = `${endpoint}: ${response.status} - ${errorText}`;
+        }
+      } catch (error) {
+        console.error(`Error with ${endpoint}:`, error);
+        lastError = `${endpoint}: ${(error as Error).message}`;
+      }
+    }
+    
+    throw new Error(`All endpoints failed. Last error: ${lastError}`);
   };
 
   return (
@@ -323,9 +432,21 @@ const MotorBookingForm: Component = () => {
           <div class="mt-12">
             <button
               onClick={handleSubmit}
-              class="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/25"
+              disabled={isSubmitting()}
+              class={`w-full font-bold py-4 px-8 rounded-xl transition-all duration-300 shadow-lg flex items-center justify-center space-x-3 ${
+                isSubmitting() 
+                  ? 'bg-gray-500 cursor-not-allowed text-gray-300' 
+                  : 'bg-yellow-500 hover:bg-yellow-400 text-black transform hover:scale-105 hover:shadow-yellow-500/25'
+              }`}
             >
-              KIRIM DATA 
+              {isSubmitting() ? (
+                <>
+                  <div class="w-5 h-5 border-2 border-gray-300 border-t-transparent rounded-full animate-spin"></div>
+                  <span>MENGIRIM DATA...</span>
+                </>
+              ) : (
+                <span>KIRIM DATA</span>
+              )}
             </button>
           </div>
 

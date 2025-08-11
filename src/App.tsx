@@ -18,10 +18,10 @@ export default function App() {
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
       <Route path="/forgotpassword" component={ForgotPasswordPage} />
-      <Route path="/Sewamotor" component={Sewamotor} />
+      <Route path="/sewamotor" component={Sewamotor} />
       <Route path="/sewa" component={Sewa} />
-      <Route path="/Profil" component={Profil} />
-      <Route path="/Orderan" component={Orderan} />
+      <Route path="/profil" component={Profil} />
+      <Route path="/orderan" component={Orderan} />
       <Route path="/gallery" component={GalleryPage} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/kirimdata" component={KirimData} />

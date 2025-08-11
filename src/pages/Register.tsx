@@ -30,6 +30,8 @@ const RegisterPage = () => {
     }
   };
 
+    const navigate = useNavigate();
+    
   const validateForm = (): boolean => {
     const data = formData();
     const newErrors: Partial<FormData> = {};
@@ -52,8 +54,8 @@ const RegisterPage = () => {
 
     if (!data.nomorTelepon.trim()) {
       newErrors.nomorTelepon = 'Nomor telepon wajib diisi';
-    } else if (!/^(\+62|62|0)[8][0-9]{8,11}$/.test(data.nomorTelepon.replace(/\s/g, ''))) {
-      newErrors.nomorTelepon = 'Format nomor telepon tidak valid (contoh: 08123456789)';
+    } else if (!/^(\+62|62|0)8[1-9][0-9]{6,9}$/.test(data.nomorTelepon)) {
+      newErrors.nomorTelepon = 'Format nomor telepon tidak valid';
     }
 
     if (!data.password) {
@@ -72,8 +74,6 @@ const RegisterPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const navigate = useNavigate();
-
  const handleSubmit = async (e: Event) => {
   e.preventDefault();
   if (!validateForm()) return;
@@ -82,32 +82,69 @@ const RegisterPage = () => {
   setErrors({});
 
   try {
-    const res = await fetch("http://localhost:8000/api/register", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    full_name: formData().namaLengkap,
-    username: formData().username,
-    email: formData().email,
-    phone: formData().nomorTelepon,
-    password: formData().password,
-  }),
-});
+    console.log('=== REGISTER ATTEMPT ===');
+    console.log('Form data:', formData());
+    
+    // Try different possible register endpoints
+    const endpoints = [
+      'http://localhost:8000/api/auth/register',
+      'http://localhost:8000/auth/register', 
+      'http://localhost:8000/api/register',
+      'http://localhost:8000/register'
+    ];
+    
+    let registerSuccess = false;
+    let lastError = '';
+    
+    for (const endpoint of endpoints) {
+      try {
+        console.log(`Trying register endpoint: ${endpoint}`);
+        
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            full_name: formData().namaLengkap,
+            username: formData().username,
+            email: formData().email,
+            phone: formData().nomorTelepon,
+            password: formData().password,
+            // Alternative field names
+            nama: formData().namaLengkap,
+            no_hp: formData().nomorTelepon
+          }),
+        });
 
-    if (!res.ok) {
-      const err = await res.text();
-      throw new Error(err || "Register failed");
+        console.log(`${endpoint} - Response status:`, res.status);
+
+        if (res.ok) {
+          console.log('Register successful at', endpoint);
+          navigate("/login");
+          registerSuccess = true;
+          break;
+        } else {
+          const errorData = await res.text();
+          console.log(`${endpoint} failed:`, res.status, errorData);
+          lastError = `${endpoint}: ${res.status} - ${errorData}`;
+        }
+      } catch (err) {
+        console.log(`Error with ${endpoint}:`, err);
+        lastError = `${endpoint}: ${(err as Error).message}`;
+      }
+    }
+    
+    if (!registerSuccess) {
+      throw new Error(`Register gagal di semua endpoint. Last error: ${lastError}`);
     }
 
-    // berhasil, arahkan ke halaman login
-    navigate("/login");
   } catch (error) {
+    console.error('Register error:', error);
+    // tampilkan error umum
     setErrors({ email: (error as Error).message });
   } finally {
     setIsLoading(false);
   }
 };
-
 
   return (
     <div class="min-h-screen bg-black flex">
