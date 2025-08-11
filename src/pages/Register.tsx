@@ -74,22 +74,77 @@ const RegisterPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: Event) => {
-    e.preventDefault();
+ const handleSubmit = async (e: Event) => {
+  e.preventDefault();
+  if (!validateForm()) return;
+
+  setIsLoading(true);
+  setErrors({});
+
+  try {
+    console.log('=== REGISTER ATTEMPT ===');
+    console.log('Form data:', formData());
     
-    if (!validateForm()) {
-      return;
+    // Try different possible register endpoints
+    const endpoints = [
+      'http://localhost:8000/api/auth/register',
+      'http://localhost:8000/auth/register', 
+      'http://localhost:8000/api/register',
+      'http://localhost:8000/register'
+    ];
+    
+    let registerSuccess = false;
+    let lastError = '';
+    
+    for (const endpoint of endpoints) {
+      try {
+        console.log(`Trying register endpoint: ${endpoint}`);
+        
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            full_name: formData().namaLengkap,
+            username: formData().username,
+            email: formData().email,
+            phone: formData().nomorTelepon,
+            password: formData().password,
+            // Alternative field names
+            nama: formData().namaLengkap,
+            no_hp: formData().nomorTelepon
+          }),
+        });
+
+        console.log(`${endpoint} - Response status:`, res.status);
+
+        if (res.ok) {
+          console.log('Register successful at', endpoint);
+          navigate("/login");
+          registerSuccess = true;
+          break;
+        } else {
+          const errorData = await res.text();
+          console.log(`${endpoint} failed:`, res.status, errorData);
+          lastError = `${endpoint}: ${res.status} - ${errorData}`;
+        }
+      } catch (err) {
+        console.log(`Error with ${endpoint}:`, err);
+        lastError = `${endpoint}: ${(err as Error).message}`;
+      }
+    }
+    
+    if (!registerSuccess) {
+      throw new Error(`Register gagal di semua endpoint. Last error: ${lastError}`);
     }
 
-    setIsLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Registration data:', formData());
-      setIsLoading(false);
-      // Add your registration logic here
-    }, 2000);
-  };
+  } catch (error) {
+    console.error('Register error:', error);
+    // tampilkan error umum
+    setErrors({ email: (error as Error).message });
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div class="min-h-screen bg-black flex">

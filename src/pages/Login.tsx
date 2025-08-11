@@ -11,30 +11,90 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e: Event) => {
-    e.preventDefault();
-    setError('');
-    
-    // Validation check
-    if (!username().trim()) {
-      setError('Username harus diisi');
-      return;
-    }
-    
-    if (!password().trim()) {
-      setError('Kata sandi harus diisi');
-      return;
-    }
+  e.preventDefault();
+  setError('');
+  
 
-    setIsLoading(true);
+  if (!username().trim()) return setError('Username harus diisi');
+  if (!password().trim()) return setError('Kata sandi harus diisi');
+
+  setIsLoading(true);
+
+  try {
+    console.log('=== LOGIN ATTEMPT ===');
+    console.log('Username:', username());
     
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Login attempt:', { username: username(), password: password() });
-      setIsLoading(false);
-      // Navigate to sewamotor page only if validation passes
-      navigate('/sewamotor');
-    }, 1500);
-  };
+    // Try different possible endpoints
+    const endpoints = [
+      'http://localhost:8000/api/auth/login',
+      'http://localhost:8000/auth/login',
+      'http://localhost:8000/api/login',
+      'http://localhost:8000/login'
+    ];
+    
+    let loginSuccess = false;
+    let lastError = '';
+    
+    for (const endpoint of endpoints) {
+      try {
+        console.log(`Trying endpoint: ${endpoint}`);
+        
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: username(), password: password() })
+        });
+
+        console.log(`${endpoint} - Response status:`, res.status);
+
+        if (res.ok) {
+          const data = await res.json();
+          console.log('Login successful at', endpoint, ', data:', data);
+          
+          // Store token dengan key yang konsisten
+          const token = data.access_token || data.token || data.jwt;
+          if (!token) {
+            throw new Error('Token tidak ditemukan dalam response');
+          }
+          
+          localStorage.setItem("jwt", token);
+          
+          // Store userId jika ada
+          if (data.user && data.user.id) {
+            localStorage.setItem("userId", String(data.user.id));
+            console.log('UserId stored:', data.user.id);
+          } else if (data.userId) {
+            localStorage.setItem("userId", String(data.userId));
+            console.log('UserId stored:', data.userId);
+          }
+          
+          console.log('Redirecting to /sewamotor');
+          navigate('/sewamotor');
+          loginSuccess = true;
+          break;
+        } else {
+          const errorData = await res.text();
+          console.log(`${endpoint} failed:`, res.status, errorData);
+          lastError = `${endpoint}: ${res.status} - ${errorData}`;
+        }
+      } catch (err) {
+        console.log(`Error with ${endpoint}:`, err);
+        lastError = `${endpoint}: ${(err as Error).message}`;
+      }
+    }
+    
+    if (!loginSuccess) {
+      throw new Error(`Login gagal di semua endpoint. Last error: ${lastError}`);
+    }
+    
+  } catch (err) {
+    console.error('Login error:', err);
+    setError((err as Error).message);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div class="min-h-screen bg-black flex">
